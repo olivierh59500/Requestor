@@ -9,10 +9,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--site", help = "site to send request", required=True)
 # Require -p/--port arg, as this will be used to set the port to connect to
 parser.add_argument("-p", "--port", help = "server port to send request to", required=True)
+# Follow redirects or not
+parser.add_argument("-r","--redirect", help = "follow redirects", action = "store_true")
 parser.add_argument("--agent", help = "specify user agent")
 parser.add_argument("--path", help = "set the url path. ex: store/b/")
 parser.add_argument("--headers", help = "display headers", action = "store_true")
 parser.add_argument("--header", help = "display one value from header")
+parser.add_argument("--content", help = "show the page content", action = "store_true")
 args = parser.parse_args()
 
 # Build full url with the path if the --path argument is used
@@ -34,7 +37,7 @@ except:
     head = {'User-Agent': "python requestor v1 -- ninjasl0th"}
 
 #Send the get request to the url. Allow redirects. This can always be changed
-a = requests.get(full, allow_redirects=True, headers=head)
+a = requests.get(full, allow_redirects=args.redirect, headers=head)
 
 #Print the return code. ex: 200, 404, 500
 print "Status: ", a.status_code
@@ -46,6 +49,10 @@ if args.headers:
 #Select which header value to to view. ex: server, location, etc...
 if args.header:
     print a.headers[args.header]
-    
-print "\nYou Sent:\n",a.request.headers
+ 
+#If the --content switch is used, print the page content
+if args.content:
+    print "\n\n", a.content
+   
+#print "\nYou Sent:\n",a.request.headers
     
