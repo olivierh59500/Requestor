@@ -5,7 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--site", help = "site to send request", required=True)
-parser.add_argument("-p", "--port", help = "server port to send request to")
+parser.add_argument("-p", "--port", help = "server port to send request to", required=True)
 parser.add_argument("--agent", help = "specify user agent")
 parser.add_argument("--path", help = "set the url path. ex: store/b/")
 parser.add_argument("--headers", help = "display headers", action = "store_true")
