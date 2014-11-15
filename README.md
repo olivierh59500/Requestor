@@ -7,6 +7,9 @@ I was teaching some friends some argparse things, and they wondered how to use p
 
 After a bit, I made them this as a quick example of both. I'll keep modifying it and whatnot :D
 
+Example:
+./req.py -s http://google.com -p 80 --agent lol
+
 usage: req.py [-h] -s SITE [-p PORT] [--agent AGENT] [--path PATH] [--headers]
               [--header HEADER]
 
